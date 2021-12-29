@@ -1,13 +1,12 @@
 <?php
-// koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "phpdasar");
+require "functions.php";
 
-//ambil data dari tabel film / query data film
-$result = mysqli_query($conn, "SELECT * FROM film");
+$films = query("SELECT * FROM film");
 
-if (!$result) {
-    echo mysqli_error($conn);
-}
+
+
+
+
 
 // ambil data (fetch) film dari object result
 // mysqli_fetch_row() // mengembalikan array numerik
@@ -52,7 +51,10 @@ if (!$result) {
 </head>
 
 <body>
-    <h1>Daftar Mahasiswa</h1>
+    <h1>Daftar Film</h1>
+    <a href="tambah.php">Tambah Data Film</a>
+
+
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
@@ -66,10 +68,10 @@ if (!$result) {
         </tr>
         <?php //while ($row = mysqli_fetch_assoc($result)) : 
         ?>
-
-        <?php foreach ($result as $row) : ?>
+        <?php $i = 1; ?>
+        <?php foreach ($films as $row) : ?>
             <tr>
-                <td><?= $row["id"]; ?></td>
+                <td><?= $i; ?></td>
                 <td>
                     <a href="">Change</a> |
                     <a href="">Delete</a>
@@ -81,6 +83,7 @@ if (!$result) {
                 <td><?= $row["director"]; ?></td>
                 <td><?= $row["actors"]; ?></td>
             </tr>
+            <?php $i++; ?>
         <?php endforeach; ?>
         <?php //endwhile; 
         ?>
