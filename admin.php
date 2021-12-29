@@ -19,10 +19,16 @@ if (!$result) {
 //     var_dump($r);
 // }
 
-
+//Cara 1
 // while ($film = mysqli_fetch_assoc($result)) {
 //     var_dump($film);
 // };
+
+
+//cara 2
+// foreach ($result as $r) {
+//     var_dump($r);
+// }
 
 
 
@@ -58,7 +64,10 @@ if (!$result) {
             <th>Director</th>
             <th>Actors</th>
         </tr>
-        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+        <?php //while ($row = mysqli_fetch_assoc($result)) : 
+        ?>
+
+        <?php foreach ($result as $row) : ?>
             <tr>
                 <td><?= $row["id"]; ?></td>
                 <td>
@@ -72,8 +81,9 @@ if (!$result) {
                 <td><?= $row["director"]; ?></td>
                 <td><?= $row["actors"]; ?></td>
             </tr>
-
-        <?php endwhile; ?>
+        <?php endforeach; ?>
+        <?php //endwhile; 
+        ?>
     </table>
 </body>
 

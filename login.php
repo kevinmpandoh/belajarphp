@@ -3,7 +3,7 @@
 if (isset($_POST["submit"])) {
     // jika password benar, redirect ke halaman dashboard
     if ($_POST['username'] == "kevinmpandoh" && $_POST['password'] == "123") {
-        header("Location: dashboard.php");
+        header("Location: admin.php");
         exit;
         //jika salah tampilkan pesan kesalahan
     } else {
