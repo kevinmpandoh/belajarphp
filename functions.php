@@ -38,11 +38,39 @@ function tambah($data)
     return mysqli_affected_rows($conn);
 }
 
-function hapus($id){
+function hapus($id)
+{
     global $conn;
 
     $query = "DELETE FROM film WHERE id = $id";
-    mysqli_query($conn,$query);
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function ubah($data)
+{
+    global $conn;
+    $id = $data["id"];
+    $title = htmlspecialchars($data["title"]);
+    $released = htmlspecialchars($data["released"]);
+    $genre = htmlspecialchars($data["genre"]);
+    $director = htmlspecialchars($data["director"]);
+    $actors = htmlspecialchars($data["actors"]);
+    $image = htmlspecialchars($data["image"]);
+
+
+    //querry update data
+    $query = "UPDATE film SET
+                title = '$title',
+                released = '$released',
+                genre = '$genre',
+                director = '$director',
+                actors = '$actors',
+                image = '$image'
+                WHERE id = $id
+                ";
+    mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
 }

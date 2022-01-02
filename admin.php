@@ -73,7 +73,7 @@ $films = query("SELECT * FROM film");
             <tr>
                 <td><?= $i; ?></td>
                 <td>
-                    <a href="">Change</a> |
+                    <a href="ubah.php?id=<?= $row["id"]; ?>">Change</a> |
                     <a href="hapus.php?id=<?= $row["id"]; ?>" onclick=" return confirm('Yakin ?')">Delete</a>
                 </td>
                 <td><img src="<?= $row["image"]; ?>" alt=""></td>
