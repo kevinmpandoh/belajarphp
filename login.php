@@ -1,15 +1,22 @@
 <?php
+require "functions.php";
 // mengecek jika tombol sudah ditekan
-if (isset($_POST["submit"])) {
-    // jika password benar, redirect ke halaman dashboard
-    if ($_POST['username'] == "kevinmpandoh" && $_POST['password'] == "123") {
-        header("Location: admin.php");
-        exit;
-        //jika salah tampilkan pesan kesalahan
-    } else {
-        $error = true;
+if (isset($_POST["login"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+    if (mysqli_num_rows($result) === 1) {
+        // cek password
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row["password"])) {
+            header("Location: admin.php");
+            exit;
+        };
     }
-}
+    $error = true;
+};
+
 
 ?>
 
@@ -29,8 +36,9 @@ if (isset($_POST["submit"])) {
     <?php if (isset($error)) : ?>
         <p style="color:red; font-style:italic;">username / password yang anda masukkan salah!</p>
     <?php endif; ?>
-    <ul>
-        <form action="" method="post">
+
+    <form action="" method="post">
+        <ul>
             <li>
                 <label for="username">Username :</label>
                 <input type="text" name="username" id="username">
@@ -40,16 +48,10 @@ if (isset($_POST["submit"])) {
                 <input type="password" name="password" id="password">
             </li>
             <li>
-                <button type="submit" name="submit">Login</button>
+                <button type="submit" name="login">Login</button>
             </li>
-        </form>
-
-
-
-    </ul>
-
-
-
+        </ul>
+    </form>
 </body>
 
 </html>
