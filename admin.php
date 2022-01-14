@@ -3,38 +3,10 @@ require "functions.php";
 
 $films = query("SELECT * FROM film");
 
-
-
-
-
-
-// ambil data (fetch) film dari object result
-// mysqli_fetch_row() // mengembalikan array numerik
-// mysqli_fetch_assoc() // mengembalikan array assosiative
-// mysqli_fetch_array() // mengembalikan keduanya
-// mysqli_fetch_object() // mengembalikan object
-
-// foreach ($result as $r) {
-//     var_dump($r);
-// }
-
-//Cara 1
-// while ($film = mysqli_fetch_assoc($result)) {
-//     var_dump($film);
-// };
-
-
-//cara 2
-// foreach ($result as $r) {
-//     var_dump($r);
-// }
-
-
-
-
-
-
-
+// tombol cari di tekan
+if (isset($_POST["cari"])) {
+    $films = cari($_POST["keyword"]);
+}
 
 ?>
 
@@ -53,6 +25,12 @@ $films = query("SELECT * FROM film");
 <body>
     <h1>Daftar Film</h1>
     <a href="tambah.php">Tambah Data Film</a>
+
+    <form action="" method="post">
+
+        <input type="text" name="keyword" id="keyword" size="40" autofocus placeholder="Masukkan keyword pencarian" autocomplete="off">
+        <button type="submit" name="cari">Cari</button>
+    </form>
 
 
     <table border="1" cellpadding="10" cellspacing="0">
@@ -76,7 +54,7 @@ $films = query("SELECT * FROM film");
                     <a href="ubah.php?id=<?= $row["id"]; ?>">Change</a> |
                     <a href="hapus.php?id=<?= $row["id"]; ?>" onclick=" return confirm('Yakin ?')">Delete</a>
                 </td>
-                <td><img src="<?= $row["image"]; ?>" alt=""></td>
+                <td><img src="img/<?= $row["image"] ?>" alt="" width="40"></td>
                 <td><?= $row["title"]; ?></td>
                 <td><?= $row["released"]; ?></td>
                 <td><?= $row["genre"]; ?></td>

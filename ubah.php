@@ -45,8 +45,9 @@ if (isset($_POST['submit'])) {
 <body>
     <h1>Update Data Film</h1>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $film["id"] ?>">
+        <input type="hidden" name="gambarLama" value="<?= $film["image"] ?>">
         <ul>
             <li>
                 <label for="title">Judul Film :</label>
@@ -69,8 +70,9 @@ if (isset($_POST['submit'])) {
                 <input type="text" name="actors" id="actors" value="<?= $film["actors"] ?>">
             </li>
             <li>
-                <label for="image">Gambar :</label>
-                <input type="text" name="image" id="image" value="<?= $film["image"] ?>">
+                <label for="image">Gambar :</label> <br>
+                <img src="img/<?= $film["image"] ?>" alt="" width="40">
+                <input type="file" name="image" id="image">
             </li>
             <li>
                 <button type="submit" name="submit">Update Data</button>
