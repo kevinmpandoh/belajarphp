@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
+
 require "functions.php";
 
 $films = query("SELECT * FROM film");
@@ -23,6 +31,7 @@ if (isset($_POST["cari"])) {
 </head>
 
 <body>
+    <a href="logout.php">Logout</a>
     <h1>Daftar Film</h1>
     <a href="tambah.php">Tambah Data Film</a>
 
